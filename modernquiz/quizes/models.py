@@ -16,6 +16,9 @@ class Quiz(models.Model):
         auto_now=True
     )
 
+    class Meta:
+        verbose_name_plural = 'Quizes'
+
 
 class Question(models.Model):
     QUESTION_TYPES = (
