@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# IDE stuff
+.vscode/
+
+# actual, not dummy settings
+settings.py
