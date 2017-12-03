@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
+    'import_export',
 
     'quizes',
     'core',
