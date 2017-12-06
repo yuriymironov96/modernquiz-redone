@@ -1,0 +1,15 @@
+<category title="Some other quiz">
+	<quiz title="Other quiz title" description="This is some other quiz.">
+		<question text="testWhat does test stand for?" type="single">
+			<answer text="testCreative test Sheets" correct="false" />
+			<answer text="testCascading test Sheets" correct="true" />
+			<answer text="testColorful test Sheets" correct="false" />
+			<answer text="testComputer test Sheets" correct="false" />
+		</question>
+		<question text="testWhat is the correct test for referring to an external style test?" type="single">
+			<answer text="test&lt;test src=&quot;test.css&quot;&gt;" correct="false" />
+			<answer text="test&lt;test rel=&quot;testsheet&quot; type=&quot;text/css&quot; href=&quot;mystyle.css&quot;&gt;" correct="true" />
+			<answer text="test&lt;testsheet&gt;mytest.css&lt;/stylesheet&gt;" correct="false" />
+		</question>
+    </quiz>
+</category>
