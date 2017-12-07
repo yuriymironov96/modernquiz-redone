@@ -1,13 +1,20 @@
 from django.db import models
 
+from quizes.managers import QuizManager
+
 
 class Quiz(models.Model):
+    objects = QuizManager()
+    
     title = models.CharField(
         max_length=200
     )
     description = models.TextField(
         null=True,
         blank=True
+    )
+    is_public = models.BooleanField(
+        default=False
     )
     create_time = models.DateTimeField(
         auto_now_add=True
@@ -41,7 +48,8 @@ class Question(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(
         'quizes.Question',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='choices',
     )
     is_correct = models.BooleanField(
         default=False
