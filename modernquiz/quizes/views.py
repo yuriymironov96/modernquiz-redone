@@ -30,9 +30,8 @@ class QuizListAPIView(ListAPIView):
 
 
 @api_view(['POST'])
-# TODO return default auth class back in settings!!!!!
-# @permission_classes([TeacherPermission,])
-# @parser_classes([FileUploadParser,])
+@permission_classes([TeacherPermission,])
+@parser_classes([FileUploadParser,])
 def create_quiz_from_xml(request):
     
     Quiz.objects.create_from_xml(
