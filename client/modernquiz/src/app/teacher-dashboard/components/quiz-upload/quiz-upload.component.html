@@ -1,0 +1,18 @@
+<mat-card>
+  <form *ngIf="!this.completed" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <button mat-raised-button color="accent" type="button" md-button (click)="fileInput.click()">Upload quiz</button>
+      <input hidden type="file" id="quiz-file" (change)="onFileChange($event)" #fileInput>
+      <span *ngIf="this.form.value.quizFile">{{this.form.value.quizFile.name}}</span>
+    </div>
+    <br>
+    <div *ngIf="this.form.value.quizFile" class="form-group">
+      <button mat-raised-button color="warn" type="button" class="btn btn-sm btn-default" (click)="clearFile()">Clear file</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </div>
+  </form>
+  <button *ngIf="this.completed" mat-raised-button color="primary" type="button" class="btn btn-sm btn-default" (click)="this.completed = false;">Upload something else?</button>
+  <br>
+  <mat-progress-bar *ngIf="this.loading" color="warn" mode="buffer" bufferValue="bufferValue">
+</mat-progress-bar>
+</mat-card>

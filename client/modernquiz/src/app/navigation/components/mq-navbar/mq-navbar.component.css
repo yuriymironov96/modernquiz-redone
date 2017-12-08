@@ -1,3 +1,7 @@
-.fill-remaining-space {
-    flex: 1 1 auto;
-  }
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.nav-element {
+  margin-right: 10px;
+}
