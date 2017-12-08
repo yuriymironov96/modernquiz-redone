@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthModule } from './auth/auth.module';
+
 import { NavigationModule } from './navigation/navigation.module';
 
 import { CommonDashboardModule } from './common-dashboard/common-dashboard.module';
@@ -15,6 +17,11 @@ import { AppComponent } from './app.component';
 
 
 export const ROUTES: Routes = [
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
   {
     path: 'home',
     component: HomePageComponent,
@@ -34,6 +41,7 @@ export const ROUTES: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
+    AuthModule,
     NavigationModule,
     CommonDashboardModule,
     TeacherDashboardModule

@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils import timezone
 from django.contrib import auth
@@ -61,6 +63,10 @@ class StudentQuizResult(models.Model):
         limit_choices_to={
             'user_type': 'student'
         }
+    )
+    personal_link = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False
     )
     quiz = models.ForeignKey(
         'quizes.Quiz',
