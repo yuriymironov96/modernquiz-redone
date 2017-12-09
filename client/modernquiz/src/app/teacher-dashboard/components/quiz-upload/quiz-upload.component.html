@@ -1,4 +1,7 @@
 <mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="!this.completed && !this.errors">Please upload quiz file:</mat-card-title>
+  </mat-card-header>
   <form *ngIf="!this.completed && !this.errors" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <button mat-raised-button color="accent" type="button" md-button (click)="fileInput.click()">Upload quiz</button>
