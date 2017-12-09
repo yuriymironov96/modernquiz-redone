@@ -32,7 +32,12 @@ export class LoginComponent {
       this.form.get('password').value
     ).subscribe(
       success => {
-        this.router.navigateByUrl('home');
+        this.authService.getCurrrentUser().subscribe(
+          nameSuccess => {
+            console.log(nameSuccess);
+            this.router.navigateByUrl('home');
+          }
+        );
       },
       error => {
         this.loading = false;

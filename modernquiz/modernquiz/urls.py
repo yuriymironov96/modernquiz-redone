@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.staticfiles.views import serve
+from modernquiz import views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/quizes/', include('quizes.urls')),
     url(r'^api/auth/', include('djoser.urls')),
     url(r'^api/auth/', include('djoser.urls.authtoken')),
+    url(r'^$', serve,
+        kwargs={'path': 'index.html'}, name='home'),
+    url(r'^.*/$', views.redirect_to_home, name='redirect-to-home'),
 ]

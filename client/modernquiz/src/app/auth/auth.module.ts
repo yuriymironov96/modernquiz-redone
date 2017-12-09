@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
+import { IdentityService } from './services/identity.service';
 
 
 @NgModule({
@@ -25,6 +26,6 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule
   ],
   declarations: [LoginComponent],
-  providers: [AuthGuard, AuthService]
+  providers: [AuthGuard, AuthService, IdentityService]
 })
 export class AuthModule { }
