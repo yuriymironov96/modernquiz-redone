@@ -1,5 +1,3 @@
-<mat-progress-spinner *ngIf="loading" color="primary" class="centered" mode="indeterminate">
-</mat-progress-spinner>
 <a mat-raised-button color="primary" class="import-quiz-button nav-element" *ngIf="isTeacher" mat-button routerLink="/import" routerLinkActive="mat-elevation-z6">
   <mat-icon matSuffix>backup</mat-icon>
   Import
@@ -18,30 +16,32 @@
   </mat-card-content>
   <mat-card-actions>
     <button *ngIf="isTeacher && !quiz['is_public']" mat-raised-button color="primary" (click)="toggleQuiz(quiz)">
-        <mat-icon matSuffix>flight_takeoff</mat-icon>
-        PUBLISH
+      <mat-icon matSuffix>flight_takeoff</mat-icon>
+      PUBLISH
     </button>
     <button *ngIf="isTeacher && quiz['is_public']" mat-raised-button color="primary" (click)="toggleQuiz(quiz)">
-        <mat-icon matSuffix>flight_land</mat-icon>
-        UNPUBLISH
+      <mat-icon matSuffix>flight_land</mat-icon>
+      UNPUBLISH
     </button>
     <a *ngIf="isTeacher" mat-raised-button color="primary" href="{{'http://localhost:8000/admin/quizes/quiz/' + quiz['id'] + '/change/'}}" target="_blank">
-        <mat-icon matSuffix>mode_edit</mat-icon>
-        EDIT
+      <mat-icon matSuffix>mode_edit</mat-icon>
+      EDIT
     </a>
     <button *ngIf="isTeacher" mat-raised-button color="warn" (click)="deleteQuiz(quiz['id'])">
-        <mat-icon matSuffix>delete_forever</mat-icon>
-        DELETE
-      </button>
+      <mat-icon matSuffix>delete_forever</mat-icon>
+      DELETE
+    </button>
     <button *ngIf="!isTeacher" mat-raised-button color="warn">
-        <mat-icon matSuffix>flight_takeoff</mat-icon>
-        START QUIZ
-      </button>
+      <mat-icon matSuffix>flight_takeoff</mat-icon>
+      START QUIZ
+    </button>
   </mat-card-actions>
 </mat-card>
 <mat-card class="quiz-card" *ngIf="count == 0">
-    <mat-card-content>
-        <mat-icon matSuffix>mood_bad</mat-icon>
-        No quizes to see!
-    </mat-card-content>
-  </mat-card>
+  <mat-card-content>
+    <mat-icon matSuffix>mood_bad</mat-icon>
+    No quizes to see!
+  </mat-card-content>
+</mat-card>
+<mat-progress-spinner *ngIf="loading" color="primary" class="centered" mode="indeterminate">
+  </mat-progress-spinner>
