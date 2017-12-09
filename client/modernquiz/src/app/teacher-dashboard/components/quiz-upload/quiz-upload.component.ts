@@ -14,6 +14,7 @@ export class QuizUploadComponent {
   form: FormGroup;
   loading = false;
   completed = false;
+  errors = false;
   quizUploadService: QuizUploadService;
 
   @ViewChild('fileInput') fileInput: ElementRef;
@@ -48,15 +49,13 @@ export class QuizUploadComponent {
 
     this.quizUploadService.upload(formModel, {}).subscribe(
       success => {
-        alert('done!');
         this.loading = false;
         this.completed = true;
         this.createForm();
       },
       error => {
-        alert('something went wrong! ' + error.ExceptionMessage);
         this.loading = false;
-        this.completed = true;
+        this.errors = true;
         this.createForm();
       });
   }
