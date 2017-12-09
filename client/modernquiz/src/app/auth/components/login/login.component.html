@@ -1,0 +1,14 @@
+<mat-card>
+  <div class="example-container">
+    <form *ngIf="!this.completed" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field class="form-group">
+        <input matInput placeholder="Login" required class="spa-font" id="login" formControlName="login" #loginInput>
+      </mat-form-field>
+      <mat-form-field class="form-group">
+        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required formControlName="password" class="spa-font" id="password" #passwordInput>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" class="btn btn-success" [disabled]="form.invalid || loading">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </form>
+  </div>
+</mat-card>

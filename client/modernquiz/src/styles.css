@@ -3,10 +3,12 @@
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 body {
   background-color: rgb(48, 48, 48);
+  margin: 0px;
 }
 
 .spa-font {
-  color: rgb(193, 193, 193);
+  color: rgb(193, 193, 193) !important;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .spa-card {

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthModule } from './auth/auth.module';
+import { LoginComponent } from './auth/components/login/login.component';
 
 import { NavigationModule } from './navigation/navigation.module';
 
@@ -30,6 +31,11 @@ export const ROUTES: Routes = [
   {
     path: 'import',
     component: QuizUploadComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent,
     pathMatch: 'full'
   }
 ];
