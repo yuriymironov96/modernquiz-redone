@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   hide = true;
   loading = false;
+  errors = {};
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.createForm();
   }
 
@@ -24,5 +27,19 @@ export class LoginComponent {
 
   onSubmit() {
     this.loading = true;
+    this.authService.login(
+      this.form.get('login').value,
+      this.form.get('password').value
+    ).subscribe(
+      success => {
+        this.router.navigateByUrl('home');
+      },
+      error => {
+        this.loading = false;
+        this.errors = {
+          'error': 'Invalid credentials'
+        };
+        this.createForm();
+      });
   }
 }
