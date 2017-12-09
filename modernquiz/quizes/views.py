@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from rest_framework.decorators import (
     api_view, permission_classes, parser_classes)
 from rest_framework.viewsets import ModelViewSet
@@ -50,4 +51,32 @@ def create_quiz_from_xml(request):
         )
     )
 
-    return Response({'status': 'OK'}, headers={'Access-Control-Allow-Origin': '*'})
+    return Response({'status': 'OK'}, headers={
+        'Access-Control-Allow-Origin': '*'
+    })
+
+
+@api_view(['POST'])
+@permission_classes([TeacherPermission,])
+def generate_creds(request):
+
+    response_body = {
+        'creds': []
+    }
+    
+    students = User.objects.filter(userprofile__user_type='student')
+
+    for student in students:
+        password = User.objects.make_random_password()
+        student.set_password(password)
+        student.save()
+        response_body['creds'].append({
+            'first_name': student.first_name,
+            'last_name': student.last_name,
+            'username': student.username,
+            'password': password,
+        })
+
+    return Response(response_body, headers={
+        'Access-Control-Allow-Origin': '*'
+    })

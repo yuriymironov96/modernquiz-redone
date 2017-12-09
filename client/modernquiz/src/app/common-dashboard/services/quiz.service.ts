@@ -45,4 +45,16 @@ export class QuizService {
       .catch(error => Observable.throw(error));
   }
 
+  prepateStudentCreds() {
+    const headers = new Headers({
+      'Authorization': 'Token ' + localStorage.getItem('currentUserToken')
+    });
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post('http://localhost:8000/api/quizes/quizes/generate_creds/', {}, options)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error));
+  }
+
 }

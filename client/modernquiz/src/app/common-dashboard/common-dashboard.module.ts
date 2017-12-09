@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -24,7 +25,8 @@ import { StudentCredsModalComponent } from './components/student-creds-modal/stu
     MatButtonModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ],
   entryComponents: [StartQuizModalComponent, StudentCredsModalComponent],
   declarations: [HomePageComponent, AboutPageComponent, QuizListComponent, StartQuizModalComponent, StudentCredsModalComponent],

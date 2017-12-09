@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material';
 import { QuizService } from '../../services/quiz.service';
 import { StartQuizModalComponent } from '../start-quiz-modal/start-quiz-modal.component';
 import { StudentCredsModalComponent } from '../student-creds-modal/student-creds-modal.component';
-import { debug } from 'util';
+import { BehaviorSubject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-quiz-list',
@@ -92,6 +92,7 @@ export class QuizListComponent implements OnInit {
                 this.loading = false;
                 this.count = data.count;
                 this.QUIZES = data.results;
+                this.openCredsDialog();
               }
             );
           }
@@ -101,15 +102,14 @@ export class QuizListComponent implements OnInit {
   }
 
   openCredsDialog(): void {
-    const dialogRef = this.dialog.open(StudentCredsModalComponent, {
-      width: '250px',
-      data: { creds: undefined }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
+    this.quizService.prepateStudentCreds().subscribe(
+      success => {
+        const dialogRef = this.dialog.open(StudentCredsModalComponent, {
+          width: '500px',
+          data: { creds: success.creds }
+        });
+      }
+    );
   }
-
 
 }
