@@ -33,6 +33,8 @@ export class AuthService {
       this.jwt())
       .map((response: Response) => {
         const user = response.json();
+        localStorage.setItem('currentUserName', user.username);
+        localStorage.setItem('currentUserType', user.user_type);
         this.identity.updateUser(user);
       });
   }

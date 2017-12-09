@@ -1,7 +1,9 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
   <a mat-button class="nav-element" routerLink="/home" routerLinkActive="mat-elevation-z9">Modernquiz</a>
   <a mat-button class="nav-element" routerLink="/about" routerLinkActive="mat-elevation-z9">About</a>
+  <a *ngIf="userType == 'teacher'" mat-button class="nav-element" routerLink="/import" routerLinkActive="mat-elevation-z9">Import</a>
   <!-- <a mat-button class="nav-element" routerLink="/import" routerLinkActive="mat-elevation-z9">Import</a> -->
   <span class="example-fill-remaining-space"></span>
-  <a mat-button (click)="logout()">Logout</a>
+  <a mat-button class="nav-element">{{userName}}</a>
+  <a *ngIf="user" mat-button (click)="logout()">Logout</a>
 </mat-toolbar>

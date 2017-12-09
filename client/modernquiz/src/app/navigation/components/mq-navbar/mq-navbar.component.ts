@@ -15,7 +15,7 @@ export class MqNavbarComponent implements OnInit {
   constructor(identity: IdentityService, router: Router) {
     this.router = router;
     this.identity = identity;
-    identity.userChange.subscribe(value => { debugger;this.currentUser = value; });
+    identity.userChange.subscribe(value => { this.currentUser = value; });
   }
 
   ngOnInit() {
@@ -23,7 +23,21 @@ export class MqNavbarComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('currentUserToken');
+    localStorage.removeItem('currentUserName');
+    localStorage.removeItem('currentUserType');
     this.router.navigateByUrl('auth/login');
+  }
+
+  get user(): any {
+    return localStorage.getItem('currentUserToken');
+  }
+
+  get userName(): any {
+    return localStorage.getItem('currentUserName');
+  }
+
+  get userType(): any {
+    return localStorage.getItem('currentUserType');
   }
 
 }
