@@ -1,4 +1,8 @@
 <mat-card>
+  <mat-card-header>
+    <mat-card-title>Please enter your credentials</mat-card-title>
+    <mat-card-subtitle>(your teacher should give them as soon as the quiz is published)</mat-card-subtitle>
+  </mat-card-header>
   <div class="example-container">
     <form *ngIf="!this.completed" [formGroup]="form" (ngSubmit)="onSubmit()">
       <mat-form-field class="form-group">
@@ -11,5 +15,8 @@
       <button mat-raised-button color="primary" type="submit" class="btn btn-success" [disabled]="form.invalid || loading">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
     </form>
   </div>
-  {{this.errors['errors']}}
+  <div *ngIf="errors['error']">
+      <mat-icon matSuffix>priority_high</mat-icon>
+      {{errors['error']}}
+  </div>
 </mat-card>

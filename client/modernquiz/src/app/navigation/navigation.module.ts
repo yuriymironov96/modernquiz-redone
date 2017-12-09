@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -18,4 +18,13 @@ import { MqNavbarComponent } from './components/mq-navbar/mq-navbar.component';
   declarations: [MqNavbarComponent],
   exports: [MqNavbarComponent]
 })
-export class NavigationModule { }
+export class NavigationModule {
+  static forRoot(IdentityService): ModuleWithProviders {
+    return {
+        ngModule: NavigationModule,
+        providers: [
+          IdentityService
+        ]
+    };
+  }
+}

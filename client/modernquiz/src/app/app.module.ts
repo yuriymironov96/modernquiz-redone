@@ -15,6 +15,9 @@ import { TeacherDashboardModule } from './teacher-dashboard/teacher-dashboard.mo
 import { QuizUploadComponent } from './teacher-dashboard/components/quiz-upload/quiz-upload.component';
 
 import { AppComponent } from './app.component';
+import { IdentityService } from './identity.service';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AboutPageComponent } from './common-dashboard/components/about-page/about-page.component';
 
 
 export const ROUTES: Routes = [
@@ -26,12 +29,20 @@ export const ROUTES: Routes = [
   {
     path: 'home',
     component: HomePageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'about',
+    component: AboutPageComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'import',
     component: QuizUploadComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth/login',
@@ -47,12 +58,12 @@ export const ROUTES: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
-    AuthModule,
-    NavigationModule,
+    AuthModule.forRoot(IdentityService),
+    NavigationModule.forRoot(IdentityService),
     CommonDashboardModule,
     TeacherDashboardModule
   ],
-  providers: [],
+  providers: [IdentityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

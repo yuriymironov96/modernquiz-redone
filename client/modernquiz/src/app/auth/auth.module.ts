@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,7 +11,6 @@ import { MatCardModule } from '@angular/material/card';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
-import { IdentityService } from './services/identity.service';
 
 
 @NgModule({
@@ -26,6 +25,15 @@ import { IdentityService } from './services/identity.service';
     ReactiveFormsModule
   ],
   declarations: [LoginComponent],
-  providers: [AuthGuard, AuthService, IdentityService]
+  providers: [AuthGuard, AuthService]
 })
-export class AuthModule { }
+export class AuthModule {
+  static forRoot(IdentityService): ModuleWithProviders {
+  return {
+      ngModule: AuthModule,
+      providers: [
+        IdentityService
+      ]
+  };
+}
+}

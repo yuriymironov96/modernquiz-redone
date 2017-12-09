@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { IdentityService } from '../../identity.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: Http) {}
+  constructor(private http: Http, private identity: IdentityService) {}
 
   login(username: string, password: string) {
     return this.http.post(
@@ -32,11 +33,7 @@ export class AuthService {
       this.jwt())
       .map((response: Response) => {
         const user = response.json();
-        if (user && user.token) {
-          localStorage.setItem('currentUserToken', JSON.stringify(user.token));
-        }
-
-        return user;
+        this.identity.updateUser(user);
       });
   }
 
