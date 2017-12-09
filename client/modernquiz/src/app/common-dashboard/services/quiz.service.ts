@@ -16,7 +16,7 @@ export class QuizService {
     const options = new RequestOptions({
       headers: headers
     });
-    return this.http.get('http://localhost:8000/api/quizes/quizes/', options)
+    return this.http.get('/api/quizes/quizes/', options)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
   }
@@ -28,7 +28,7 @@ export class QuizService {
     const options = new RequestOptions({
       headers: headers
     });
-    return this.http.delete('http://localhost:8000/api/quizes/quizes/' + quizId + '/', options)
+    return this.http.delete('/api/quizes/quizes/' + quizId + '/', options)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
   }
@@ -40,7 +40,7 @@ export class QuizService {
     const options = new RequestOptions({
       headers: headers
     });
-    return this.http.patch('http://localhost:8000/api/quizes/quizes/' + quizId + '/', changes, options)
+    return this.http.patch('/api/quizes/quizes/' + quizId + '/', changes, options)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
   }
@@ -52,7 +52,7 @@ export class QuizService {
     const options = new RequestOptions({
       headers: headers
     });
-    return this.http.post('http://localhost:8000/api/quizes/quizes/generate_creds/', {}, options)
+    return this.http.post('/api/quizes/quizes/generate_creds/', {}, options)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
   }

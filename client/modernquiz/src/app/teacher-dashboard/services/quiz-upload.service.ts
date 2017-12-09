@@ -17,7 +17,7 @@ export class QuizUploadService {
       headers: headers,
       params: parameters
     });
-    return this.http.post('http://localhost:8000/api/quizes/quizes/create_from_xml/', files, options)
+    return this.http.post('/api/quizes/quizes/create_from_xml/', files, options)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
 

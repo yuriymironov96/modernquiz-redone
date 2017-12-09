@@ -23,7 +23,7 @@
       <mat-icon matSuffix>flight_land</mat-icon>
       UNPUBLISH
     </button>
-    <a *ngIf="isTeacher" mat-raised-button color="primary" href="{{'http://localhost:8000/admin/quizes/quiz/' + quiz['id'] + '/change/'}}" target="_blank">
+    <a *ngIf="isTeacher" mat-raised-button color="primary" href="{{'/admin/quizes/quiz/' + quiz['id'] + '/change/'}}" target="_blank">
       <mat-icon matSuffix>mode_edit</mat-icon>
       EDIT
     </a>

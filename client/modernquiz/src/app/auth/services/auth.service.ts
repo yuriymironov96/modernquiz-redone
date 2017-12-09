@@ -10,7 +10,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http.post(
-      'http://localhost:8000/api/auth/token/create/',
+      '/api/auth/token/create/',
       { username: username, password: password })
       .map((response: Response) => {
         const user = response.json();
@@ -29,7 +29,7 @@ export class AuthService {
 
   getCurrrentUser() {
     return this.http.get(
-      'http://localhost:8000/api/auth/me/',
+      '/api/auth/me/',
       this.jwt())
       .map((response: Response) => {
         const user = response.json();
