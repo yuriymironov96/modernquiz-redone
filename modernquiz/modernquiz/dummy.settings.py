@@ -153,3 +153,9 @@ REST_FRAMEWORK = {
         'iso-8601', '%Y-%m-%dT%H:%M:%S.%fZ', '%Y-%m-%dT%H:%M:%S'],
     'DATETIME_INPUT_FORMATS': ['iso-8601', '%Y-%m-%dT%H:%M:%S.%fZ'],
 }
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user': 'core.serializers.CurrentUserSerializer',
+    }
+}
