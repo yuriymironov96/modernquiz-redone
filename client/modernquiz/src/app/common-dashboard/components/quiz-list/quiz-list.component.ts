@@ -21,7 +21,7 @@ export class QuizListComponent implements OnInit {
   public loading: boolean;
   public count: number;
 
-  constructor(quizService: QuizService, public dialog: MatDialog) {
+  constructor(quizService: QuizService, public dialog: MatDialog, private router: Router) {
     this.quizService = quizService;
     this.loading = true;
     this.quizService.get().subscribe(
@@ -47,7 +47,7 @@ export class QuizListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-
+        this.router.navigateByUrl('quiz/' + quiz['personal_link']);
       }
     });
   }

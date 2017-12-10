@@ -60,4 +60,33 @@ export class QuizService {
       .catch(error => Observable.throw(error));
   }
 
+  prepateStudentQuiz(token: string) {
+    const headers = new Headers({
+      'Authorization': 'Token ' + localStorage.getItem('currentUserToken')
+    });
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post('/api/quizes/quizes/generate_quiz/', {
+      token: token
+    }, options)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error));
+  }
+
+  submitQuiz(quiz: Object, quizToken: string) {
+    const headers = new Headers({
+      'Authorization': 'Token ' + localStorage.getItem('currentUserToken')
+    });
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post('/api/quizes/quizes/submit_results/', {
+      quiz: quiz,
+      token: quizToken
+    }, options)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error));
+  }
+
 }

@@ -68,7 +68,8 @@ def generate_creds(request):
     students = User.objects.filter(
         userprofile__user_type='student'
     ).exclude(
-        userprofile__studentquizresult__is_repassing_allowed=False
+        userprofile__studentquizresult__is_repassing_allowed=False,
+        userprofile__studentquizresult__quiz_id=request.data.get('quiz_id')
     ).select_related('userprofile')
 
     for student in students:
@@ -91,3 +92,83 @@ def generate_creds(request):
 
     return Response(response_body)
     
+
+@api_view(['POST'])
+def generate_quiz(request):
+
+    response_body = {
+        'token': request.data.get('token'),
+        'questions': []
+    }
+
+    quiz_result = StudentQuizResult.objects.filter(
+        personal_link=request.data.get('token')
+    ).select_related(
+        'quiz'
+    ).prefetch_related(
+        'quiz__questions'
+    ).latest(
+        'passing_date'
+    )
+
+    questions = quiz_result.quiz.questions.order_by('?')
+    questions = questions[0:quiz_result.questions_amount]
+
+    for question in questions:
+        response_body['questions'].append({
+            'question_id': question.id,
+            'question_type': question.question_type,
+            'question_text': question.question_text,
+            'answers': question.choices.values(
+                'id',
+                'question_id',
+                'choice_text'
+            )
+        })
+
+    return Response(response_body)
+    
+
+def _is_matching_answer(answer_id, student_answer):
+    if answer_id == student_answer:
+        return True
+    if type(student_answer) is list and answer_id in student_answer:
+        return True
+    return False
+
+
+@api_view(['POST'])
+def submit_results(request):
+
+    quiz_result = StudentQuizResult.objects.filter(
+        personal_link=request.data.get('token')
+    ).select_related(
+        'quiz'
+    ).latest(
+        'passing_date'
+    )
+
+    quiz_result.is_active = False
+    quiz_result.total_points = 0
+
+    questions = quiz_result.quiz.questions.filter(
+        id__in=request.data['quiz'].keys()
+    )
+
+    for question in questions:
+        student_is_correct = True
+        for answer in question.choices.all():
+            if not _is_matching_answer(
+                    answer.id, request.data['quiz'][str(question.id)]) and \
+                    answer.is_correct:
+                student_is_correct = False
+        if student_is_correct:
+            quiz_result.total_points += 1
+    quiz_result.save()
+                
+    response_body = {
+        'student_mark': quiz_result.total_points,
+        'max_mark': quiz_result.questions_amount
+    }
+    return Response(response_body)
+                    

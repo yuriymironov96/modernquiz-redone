@@ -28,7 +28,7 @@ class QuizLightSerializer(serializers.ModelSerializer):
         return obj.studentquizresult_set.filter(
             student__user=self.context['request'].user,
             is_active=True
-        ).first().personal_link
+        ).latest('passing_date').personal_link
 
     def get_published_question_count(self, obj):
         return obj.studentquizresult_set.filter(

@@ -1,15 +1,44 @@
 <category title="Some other quiz">
 	<quiz title="Other quiz title" description="This is some other quiz.">
-		<question text="testWhat does test stand for?" type="single">
-			<answer text="testCreative test Sheets" correct="false" />
-			<answer text="testCascading test Sheets" correct="true" />
-			<answer text="testColorful test Sheets" correct="false" />
-			<answer text="testComputer test Sheets" correct="false" />
+		<question text="Some question 1" type="single">
+			<answer text="False answer 1" correct="false" />
+			<answer text="True answer 1" correct="true" />
+			<answer text="False answer 1" correct="false" />
 		</question>
-		<question text="testWhat is the correct test for referring to an external style test?" type="single">
-			<answer text="test&lt;test src=&quot;test.css&quot;&gt;" correct="false" />
-			<answer text="test&lt;test rel=&quot;testsheet&quot; type=&quot;text/css&quot; href=&quot;mystyle.css&quot;&gt;" correct="true" />
-			<answer text="test&lt;testsheet&gt;mytest.css&lt;/stylesheet&gt;" correct="false" />
+		<question text="Some question 2" type="single">
+			<answer text="False answer 2" correct="false" />
+			<answer text="True answer 2" correct="true" />
+			<answer text="False answer 2" correct="false" />
+		</question>
+		<question text="Some question 3" type="multiple_choice">
+			<answer text="True answer 3" correct="true" />
+			<answer text="True answer 3" correct="true" />
+			<answer text="False answer 3" correct="false" />
+		</question>
+		<question text="Some question 4" type="single">
+			<answer text="False answer 4" correct="false" />
+			<answer text="True answer 4" correct="true" />
+			<answer text="False answer 4" correct="false" />
+		</question>
+		<question text="Some question 5" type="single">
+			<answer text="False answer 5" correct="false" />
+			<answer text="True answer 5" correct="true" />
+			<answer text="False answer 5" correct="false" />
+		</question>
+		<question text="Some question 6" type="multiple_choice">
+			<answer text="True answer 6" correct="true" />
+			<answer text="True answer 6" correct="true" />
+			<answer text="True answer 6" correct="true" />
+		</question>
+		<question text="Some question 7" type="multiple_choice">
+			<answer text="True answer 7" correct="true" />
+			<answer text="True answer 7" correct="true" />
+			<answer text="True answer 7" correct="true" />
+		</question>
+		<question text="Some question 8" type="multiple_choice">
+			<answer text="False answer 8" correct="false" />
+			<answer text="False answer 8" correct="false" />
+			<answer text="True answer 8" correct="true" />
 		</question>
     </quiz>
 </category>

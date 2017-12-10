@@ -18,6 +18,8 @@ import { AppComponent } from './app.component';
 import { IdentityService } from './identity.service';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AboutPageComponent } from './common-dashboard/components/about-page/about-page.component';
+import { QuizProgressComponent } from './common-dashboard/components/quiz-progress/quiz-progress.component';
+import { QuizResolverService } from './common-dashboard/services/quiz-resolver.service';
 
 
 export const ROUTES: Routes = [
@@ -47,6 +49,14 @@ export const ROUTES: Routes = [
   {
     path: 'auth/login',
     component: LoginComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'quiz/:token',
+    component: QuizProgressComponent,
+    resolve: {
+      quiz: QuizResolverService
+    },
     pathMatch: 'full'
   }
 ];

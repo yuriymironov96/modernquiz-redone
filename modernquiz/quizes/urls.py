@@ -11,6 +11,8 @@ router.register(r'quizes', views.QuizListAPIView, base_name='quizes')
 urlpatterns = [
     url(r'^quizes/create_from_xml/$', views.create_quiz_from_xml),
     url(r'^quizes/generate_creds/$', views.generate_creds),
+    url(r'^quizes/generate_quiz/$', views.generate_quiz),
+    url(r'^quizes/submit_results/$', views.submit_results),
 ]
 
 urlpatterns += router.urls

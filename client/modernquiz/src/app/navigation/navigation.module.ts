@@ -2,8 +2,10 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { MqNavbarComponent } from './components/mq-navbar/mq-navbar.component';
 
@@ -13,7 +15,8 @@ import { MqNavbarComponent } from './components/mq-navbar/mq-navbar.component';
     RouterModule,
     NoopAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   declarations: [MqNavbarComponent],
   exports: [MqNavbarComponent]
