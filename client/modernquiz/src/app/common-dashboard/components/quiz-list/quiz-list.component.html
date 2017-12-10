@@ -7,7 +7,7 @@
     <mat-card-title>{{quiz['title']}}</mat-card-title>
   </mat-card-header>
   <mat-card-subtitle>
-    {{quiz['question_count']}} questions
+    {{quiz['question_count'] || quiz['published_question_count']}} question(s)
   </mat-card-subtitle>
   <mat-card-content>
     <p>
