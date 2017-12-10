@@ -204,9 +204,7 @@ def allow_repassing(request, id):
 
     StudentQuizResult.objects.filter(
         quiz_id=id
-    ).update(
-        is_repassing_allowed=True
-    )
+    ).delete()
                 
     response_body = {
         'status': 'OK'
