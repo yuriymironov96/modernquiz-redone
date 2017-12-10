@@ -27,11 +27,11 @@
       <mat-icon matSuffix>mode_edit</mat-icon>
       EDIT
     </a>
-    <button *ngIf="isTeacher" mat-raised-button color="warn" (click)="deleteQuiz(quiz['id'])">
+    <button *ngIf="isTeacher" mat-raised-button color="warn" (click)="deleteQuiz(quiz)">
       <mat-icon matSuffix>delete_forever</mat-icon>
       DELETE
     </button>
-    <button *ngIf="!isTeacher" mat-raised-button color="warn">
+    <button *ngIf="!isTeacher" mat-raised-button color="warn" (click)="startQuiz(quiz)">
       <mat-icon matSuffix>flight_takeoff</mat-icon>
       START QUIZ
     </button>

@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Do you want to start quiz?</h2>
+<mat-dialog-content>
+  <p class="spa-font">
+    By going on, you will start "{{data['name']}}" quiz.
+  </p>
+  <p class="spa-font">Continue?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" tabindex="1">Go!</button>
+  <button mat-button [mat-dialog-close]="false" tabindex="-1">Cancel</button>
+</mat-dialog-actions>

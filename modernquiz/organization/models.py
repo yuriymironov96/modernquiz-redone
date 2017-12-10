@@ -75,7 +75,13 @@ class StudentQuizResult(models.Model):
     passing_date = models.DateTimeField(
         default=timezone.now,
     )
-    total_points = models.IntegerField()
+    total_points = models.IntegerField(
+        default=0
+    )
     is_repassing_allowed = models.BooleanField(
         default=False
     )
+    is_active = models.BooleanField(
+        default=False
+    )
+    questions_amount = models.IntegerField()

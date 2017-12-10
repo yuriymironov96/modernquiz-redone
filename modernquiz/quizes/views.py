@@ -11,6 +11,7 @@ from quizes.models import Quiz
 from quizes.serializers import QuizFullSerializer, QuizLightSerializer
 from quizes.permissions import TeacherPermission
 from quizes.utils import parse_quiz
+from organization.models import StudentQuizResult
 
 
 class QuizListAPIView(ModelViewSet):
@@ -32,8 +33,10 @@ class QuizListAPIView(ModelViewSet):
                 )
             ).all()
         return Quiz.objects.filter(
-            is_public=True
-        )
+            is_public=True,
+            studentquizresult__is_active=True,
+            studentquizresult__student__user=self.request.user,
+        ).distinct()
     
     def get_serializer_class(self):
         if self._is_teacher(self.request.user):
@@ -51,9 +54,7 @@ def create_quiz_from_xml(request):
         )
     )
 
-    return Response({'status': 'OK'}, headers={
-        'Access-Control-Allow-Origin': '*'
-    })
+    return Response({'status': 'OK'})
 
 
 @api_view(['POST'])
@@ -64,19 +65,29 @@ def generate_creds(request):
         'creds': []
     }
     
-    students = User.objects.filter(userprofile__user_type='student')
+    students = User.objects.filter(
+        userprofile__user_type='student'
+    ).exclude(
+        userprofile__studentquizresult__is_repassing_allowed=False
+    ).select_related('userprofile')
 
     for student in students:
         password = User.objects.make_random_password()
         student.set_password(password)
         student.save()
+        StudentQuizResult.objects.create(
+            student_id=student.userprofile.id,
+            quiz_id=request.data.get('quiz_id'),
+            is_active=True,
+            questions_amount=request.data.get('questions_number')
+        )
         response_body['creds'].append({
             'first_name': student.first_name,
             'last_name': student.last_name,
             'username': student.username,
             'password': password,
         })
+        
 
-    return Response(response_body, headers={
-        'Access-Control-Allow-Origin': '*'
-    })
+    return Response(response_body)
+    

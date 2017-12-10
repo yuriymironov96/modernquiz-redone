@@ -4,7 +4,9 @@ import { MatDialog } from '@angular/material';
 
 import { QuizService } from '../../services/quiz.service';
 import { StartQuizModalComponent } from '../start-quiz-modal/start-quiz-modal.component';
+import { StudentStartQuizModalComponent } from '../student-start-quiz-modal/student-start-quiz-modal.component';
 import { StudentCredsModalComponent } from '../student-creds-modal/student-creds-modal.component';
+import { DeleteConfirmModalComponent } from '../delete-confirm-modal/delete-confirm-modal.component';
 import { BehaviorSubject } from 'rxjs/Rx';
 
 @Component({
@@ -38,19 +40,40 @@ export class QuizListComponent implements OnInit {
     return localStorage.getItem('currentUserType') === 'teacher';
   }
 
-  deleteQuiz(quizId: number) {
-    this.loading = true;
-    this.quizService.delete(quizId).subscribe(
-      success => {
-        this.quizService.get().subscribe(
-          data => {
-            this.loading = false;
-            this.count = data.count;
-            this.QUIZES = data.results;
+  startQuiz(quiz: Object) {
+    const dialogRef = this.dialog.open(StudentStartQuizModalComponent, {
+      width: '250px',
+      data: { name: quiz['title'] }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+      }
+    });
+  }
+
+  deleteQuiz(quiz: Object) {
+    const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {
+      width: '250px',
+      data: { name: quiz['title'] }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loading = true;
+        this.quizService.delete(quiz['id']).subscribe(
+          success => {
+            this.quizService.get().subscribe(
+              data => {
+                this.loading = false;
+                this.count = data.count;
+                this.QUIZES = data.results;
+              }
+            );
           }
         );
       }
-    );
+    });
   }
 
   toggleQuiz(quiz: Object) {
@@ -77,11 +100,11 @@ export class QuizListComponent implements OnInit {
   openConfirmDialog(quiz): void {
     const dialogRef = this.dialog.open(StartQuizModalComponent, {
       width: '250px',
-      data: { name: quiz['title'] }
+      data: { name: quiz['title'], 'question_count': quiz['question_count'] }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result !== false) {
         this.loading = true;
         this.quizService.update(quiz['id'], {
           is_public: !quiz['is_public']
@@ -92,7 +115,7 @@ export class QuizListComponent implements OnInit {
                 this.loading = false;
                 this.count = data.count;
                 this.QUIZES = data.results;
-                this.openCredsDialog();
+                this.openCredsDialog(quiz, result);
               }
             );
           }
@@ -101,8 +124,8 @@ export class QuizListComponent implements OnInit {
     });
   }
 
-  openCredsDialog(): void {
-    this.quizService.prepateStudentCreds().subscribe(
+  openCredsDialog(quiz: Object, result: number): void {
+    this.quizService.prepateStudentCreds(quiz['id'], result).subscribe(
       success => {
         const dialogRef = this.dialog.open(StudentCredsModalComponent, {
           width: '500px',
