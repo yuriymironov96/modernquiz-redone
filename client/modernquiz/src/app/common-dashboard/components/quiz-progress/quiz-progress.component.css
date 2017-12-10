@@ -1,0 +1,20 @@
+.quiz-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.quiz-radio-button {
+  margin: 5px;
+  margin-left: 15px;
+}
+
+.quiz-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.fill-remaining-space {
+  left: 93%;
+}

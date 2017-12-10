@@ -12,8 +12,9 @@ import { QuizUploadService } from '../../services/quiz-upload.service';
 })
 export class QuizUploadComponent {
   form: FormGroup;
-  loading: boolean = false;
-  completed: boolean = false;
+  loading = false;
+  completed = false;
+  errors = false;
   quizUploadService: QuizUploadService;
 
   @ViewChild('fileInput') fileInput: ElementRef;
@@ -30,14 +31,14 @@ export class QuizUploadComponent {
   }
 
   onFileChange(event) {
-    if(event.target.files.length > 0) {
-      let file = event.target.files[0];
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
       this.form.get('quizFile').setValue(file);
     }
   }
 
   private prepareSave(): any {
-    let input = new FormData();
+    const input = new FormData();
     input.append('quizFile', this.form.get('quizFile').value);
     return input;
   }
@@ -48,15 +49,13 @@ export class QuizUploadComponent {
 
     this.quizUploadService.upload(formModel, {}).subscribe(
       success => {
-        alert('done!');
         this.loading = false;
         this.completed = true;
         this.createForm();
       },
       error => {
-        alert('something went wrong! ' + error.ExceptionMessage);
         this.loading = false;
-        this.completed = true;
+        this.errors = true;
         this.createForm();
       });
   }

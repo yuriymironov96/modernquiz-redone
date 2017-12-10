@@ -12,4 +12,12 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
   }
 
+  get userName(): string {
+    return localStorage.getItem('currentUserName');
+  }
+
+  get userType(): string {
+    return localStorage.getItem('currentUserType');
+  }
+
 }

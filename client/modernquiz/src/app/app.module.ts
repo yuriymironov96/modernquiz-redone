@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthModule } from './auth/auth.module';
+import { LoginComponent } from './auth/components/login/login.component';
+
 import { NavigationModule } from './navigation/navigation.module';
 
 import { CommonDashboardModule } from './common-dashboard/common-dashboard.module';
@@ -12,17 +15,48 @@ import { TeacherDashboardModule } from './teacher-dashboard/teacher-dashboard.mo
 import { QuizUploadComponent } from './teacher-dashboard/components/quiz-upload/quiz-upload.component';
 
 import { AppComponent } from './app.component';
+import { IdentityService } from './identity.service';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AboutPageComponent } from './common-dashboard/components/about-page/about-page.component';
+import { QuizProgressComponent } from './common-dashboard/components/quiz-progress/quiz-progress.component';
+import { QuizResolverService } from './common-dashboard/services/quiz-resolver.service';
 
 
 export const ROUTES: Routes = [
   {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
     path: 'home',
     component: HomePageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'about',
+    component: AboutPageComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'import',
     component: QuizUploadComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'quiz/:token',
+    component: QuizProgressComponent,
+    resolve: {
+      quiz: QuizResolverService
+    },
     pathMatch: 'full'
   }
 ];
@@ -34,11 +68,12 @@ export const ROUTES: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
-    NavigationModule,
+    AuthModule.forRoot(IdentityService),
+    NavigationModule.forRoot(IdentityService),
     CommonDashboardModule,
     TeacherDashboardModule
   ],
-  providers: [],
+  providers: [IdentityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

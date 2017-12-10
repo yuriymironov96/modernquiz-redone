@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Quiz has been published!</h2>
+<mat-dialog-content>
+  <p class="spa-font">
+    The following students will get access to the quiz with the respective credentials:
+  </p>
+  <p class="spa-font" *ngFor="let student of data['creds']">
+    name: {{student['first_name']}} surname: {{student['last_name']}} username: {{student['username']}} password: {{student['password']}}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" tabindex="1">Continue</button>
+</mat-dialog-actions>

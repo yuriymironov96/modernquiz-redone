@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { IdentityService } from './identity.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [IdentityService]
 })
 export class AppComponent {
   title = 'app';

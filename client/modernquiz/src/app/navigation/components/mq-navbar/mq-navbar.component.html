@@ -1,6 +1,23 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
-  <a mat-button class="nav-element" routerLink="/home" routerLinkActive="mat-elevation-z9">Modernquiz</a>
-  <a mat-button class="nav-element" routerLink="/import" routerLinkActive="mat-elevation-z9">Import</a>
+  <a mat-button class="nav-element" routerLink="/home" routerLinkActive="mat-elevation-z9">
+    Modernquiz
+    <mat-icon matSuffix>view_list</mat-icon>
+  </a>
+  <a mat-button class="nav-element" routerLink="/about" routerLinkActive="mat-elevation-z9">
+    About
+    <mat-icon matSuffix>help_outline</mat-icon>
+  </a>
+  <a *ngIf="userType == 'teacher'" mat-button class="nav-element" routerLink="/import" routerLinkActive="mat-elevation-z9">
+    Import
+    <mat-icon matSuffix>backup</mat-icon>
+  </a>
   <span class="example-fill-remaining-space"></span>
-  <span >#nopainnogain</span>
+  <a mat-button class="nav-element" *ngIf="userName">
+    {{userName}}
+    <mat-icon matSuffix>person</mat-icon>
+  </a>
+  <a *ngIf="user" mat-button (click)="logout()">
+    Logout
+    <mat-icon matSuffix>directions_walk</mat-icon>
+  </a>
 </mat-toolbar>

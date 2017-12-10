@@ -1,0 +1,32 @@
+<mat-horizontal-stepper linear="true">
+  <mat-step *ngFor="let question of quiz.questions">
+    <ng-template matStepLabel></ng-template>
+    <p class="spa-font">{{question['question_text']}}</p>
+    <mat-radio-group *ngIf="question['question_type'] == 'single'" class="quiz-radio-group" [(ngModel)]="results[question['question_id']]">
+      <mat-radio-button *ngFor="let choice of question.answers" [value]="choice['id']" class="quiz-radio-button spa-font">
+        {{choice['choice_text']}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div *ngIf="question['question_type'] != 'single'" class="quiz-radio-group">
+      <mat-checkbox *ngFor="let choice of question.answers" class="quiz-radio-button spa-font" (click)="toggleCheckbox(question, choice)">
+        {{choice['choice_text']}}
+      </mat-checkbox>
+    </div>
+    <div>
+      <button mat-raised-button matStepperNext class="spa-font fill-remaining-space" color="primary">
+        Next
+        <mat-icon matSuffix>chevron_right</mat-icon>
+      </button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel></ng-template>
+    <p class="spa-font">You are now done.</p>
+    <div>
+      <button mat-raised-button matStepperNext class="spa-font fill-remaining-space" color="primary" (click)="submit()">
+        Finish
+        <mat-icon matSuffix>last_page</mat-icon>
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

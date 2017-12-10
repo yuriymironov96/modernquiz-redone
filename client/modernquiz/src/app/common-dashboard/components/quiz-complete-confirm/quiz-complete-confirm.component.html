@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Do you want to submit results?</h2>
+<mat-dialog-content>
+  <p class="spa-font">
+    By submitting it, you complete this quiz. Please double check all the results!
+  </p>
+  <p class="spa-font">If you feel like you have completed it, click the "Submit" button.</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" tabindex="1">Submit</button>
+  <button mat-button [mat-dialog-close]="false" tabindex="-1">Cancel</button>
+</mat-dialog-actions>
