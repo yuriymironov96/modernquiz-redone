@@ -89,4 +89,28 @@ export class QuizService {
       .catch(error => Observable.throw(error));
   }
 
+  allowRepassing(quizId: number) {
+    const headers = new Headers({
+      'Authorization': 'Token ' + localStorage.getItem('currentUserToken')
+    });
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post('/api/quizes/quizes/allow_repassing/' + quizId + '/', {}, options)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error));
+  }
+
+  viewResults(quizId: number) {
+    const headers = new Headers({
+      'Authorization': 'Token ' + localStorage.getItem('currentUserToken')
+    });
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.get('/api/quizes/quizes/view_results/' + quizId + '/', options)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error));
+  }
+
 }

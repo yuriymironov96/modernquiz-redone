@@ -8,6 +8,8 @@ import { StudentStartQuizModalComponent } from '../student-start-quiz-modal/stud
 import { StudentCredsModalComponent } from '../student-creds-modal/student-creds-modal.component';
 import { DeleteConfirmModalComponent } from '../delete-confirm-modal/delete-confirm-modal.component';
 import { BehaviorSubject } from 'rxjs/Rx';
+import { RepassingNotificationModalComponent } from '../repassing-notification-modal/repassing-notification-modal.component';
+import { ResultsModalComponent } from '../results-modal/results-modal.component';
 
 @Component({
   selector: 'app-quiz-list',
@@ -40,7 +42,7 @@ export class QuizListComponent implements OnInit {
     return localStorage.getItem('currentUserType') === 'teacher';
   }
 
-  startQuiz(quiz: Object) {
+  startQuiz(quiz: Object):void {
     const dialogRef = this.dialog.open(StudentStartQuizModalComponent, {
       width: '250px',
       data: { name: quiz['title'] }
@@ -52,7 +54,7 @@ export class QuizListComponent implements OnInit {
     });
   }
 
-  deleteQuiz(quiz: Object) {
+  deleteQuiz(quiz: Object): void {
     const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {
       width: '250px',
       data: { name: quiz['title'] }
@@ -76,7 +78,7 @@ export class QuizListComponent implements OnInit {
     });
   }
 
-  toggleQuiz(quiz: Object) {
+  toggleQuiz(quiz: Object): void {
     if (!quiz['is_public']) {
       this.openConfirmDialog(quiz);
     } else {
@@ -130,6 +132,27 @@ export class QuizListComponent implements OnInit {
         const dialogRef = this.dialog.open(StudentCredsModalComponent, {
           width: '500px',
           data: { creds: success.creds }
+        });
+      }
+    );
+  }
+
+  allowRepassing(quiz: Object): void {
+    this.quizService.allowRepassing(quiz['id']).subscribe(
+      success => {
+        const dialogRef = this.dialog.open(RepassingNotificationModalComponent, {
+          width: '500px'
+        });
+      }
+    );
+  }
+
+  viewResults(quiz: Object): void {
+    this.quizService.viewResults(quiz['id']).subscribe(
+      success => {
+        const dialogRef = this.dialog.open(ResultsModalComponent, {
+          width: '500px',
+          data: { results: success.results }
         });
       }
     );

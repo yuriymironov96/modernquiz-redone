@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Quiz results:</h2>
+<mat-dialog-content>
+  <p class="spa-font" *ngFor="let result of data['results']">
+    {{result['student__user__first_name']}} {{result['student__user__last_name']}}: {{result['total_points']}}/{{result['questions_amount']}}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" tabindex="1">Ok</button>
+</mat-dialog-actions>

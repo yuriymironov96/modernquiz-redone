@@ -27,6 +27,14 @@
       EDIT
       <mat-icon matSuffix>mode_edit</mat-icon>
     </a>
+    <a *ngIf="isTeacher" mat-raised-button color="primary" (click)="allowRepassing(quiz)">
+      ALLOW REPASSING
+      <mat-icon matSuffix>cached</mat-icon>
+    </a>
+    <a *ngIf="isTeacher" mat-raised-button color="primary" (click)="viewResults(quiz)">
+      VIEW RESULTS
+      <mat-icon matSuffix>web</mat-icon>
+    </a>
     <button *ngIf="isTeacher" mat-raised-button color="warn" (click)="deleteQuiz(quiz)">
       DELETE
       <mat-icon matSuffix>delete_forever</mat-icon>

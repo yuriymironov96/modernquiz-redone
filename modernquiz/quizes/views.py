@@ -171,4 +171,45 @@ def submit_results(request):
         'max_mark': quiz_result.questions_amount
     }
     return Response(response_body)
-                    
+
+
+@api_view(['GET'])
+@permission_classes([TeacherPermission,])
+def view_results(request, id):
+
+    results = StudentQuizResult.objects.filter(
+        quiz_id=id,
+        total_points__gt=0
+    ).distinct(
+        'student'
+    ).values(
+        'student__user__username',
+        'student__user__first_name',
+        'student__user__last_name',
+        'student__user__email',
+        'total_points',
+        'questions_amount'
+    )
+                
+    response_body = {
+        'results': results
+    }
+
+    return Response(response_body)
+
+
+@api_view(['POST'])
+@permission_classes([TeacherPermission,])
+def allow_repassing(request, id):
+
+    StudentQuizResult.objects.filter(
+        quiz_id=id
+    ).update(
+        is_repassing_allowed=True
+    )
+                
+    response_body = {
+        'status': 'OK'
+    }
+
+    return Response(response_body)

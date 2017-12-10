@@ -28,6 +28,8 @@ import { QuizResolverService } from './services/quiz-resolver.service';
 import { QuizProgressComponent } from './components/quiz-progress/quiz-progress.component';
 import { QuizCompleteConfirmComponent } from './components/quiz-complete-confirm/quiz-complete-confirm.component';
 import { QuizResultsModalComponent } from './components/quiz-results-modal/quiz-results-modal.component';
+import { RepassingNotificationModalComponent } from './components/repassing-notification-modal/repassing-notification-modal.component';
+import { ResultsModalComponent } from './components/results-modal/results-modal.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { QuizResultsModalComponent } from './components/quiz-results-modal/quiz-
     DeleteConfirmModalComponent,
     StudentStartQuizModalComponent,
     QuizCompleteConfirmComponent,
-    QuizResultsModalComponent
+    QuizResultsModalComponent,
+    RepassingNotificationModalComponent,
+    ResultsModalComponent
   ],
   declarations: [
     HomePageComponent,
@@ -64,7 +68,9 @@ import { QuizResultsModalComponent } from './components/quiz-results-modal/quiz-
     StudentStartQuizModalComponent,
     QuizProgressComponent,
     QuizCompleteConfirmComponent,
-    QuizResultsModalComponent
+    QuizResultsModalComponent,
+    RepassingNotificationModalComponent,
+    ResultsModalComponent
   ],
   providers: [QuizService, QuizResolverService]
 })

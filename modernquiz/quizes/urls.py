@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^quizes/generate_creds/$', views.generate_creds),
     url(r'^quizes/generate_quiz/$', views.generate_quiz),
     url(r'^quizes/submit_results/$', views.submit_results),
+    url(r'^quizes/view_results/(?P<id>[0-9]+)/$', views.view_results),
+    url(r'^quizes/allow_repassing/(?P<id>[0-9]+)/$', views.allow_repassing),
 ]
 
 urlpatterns += router.urls

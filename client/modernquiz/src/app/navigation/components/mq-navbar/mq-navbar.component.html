@@ -12,7 +12,7 @@
     <mat-icon matSuffix>backup</mat-icon>
   </a>
   <span class="example-fill-remaining-space"></span>
-  <a mat-button class="nav-element">
+  <a mat-button class="nav-element" *ngIf="userName">
     {{userName}}
     <mat-icon matSuffix>person</mat-icon>
   </a>
