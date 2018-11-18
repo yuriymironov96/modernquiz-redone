@@ -7,7 +7,8 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 
 from core.models import UserProfile
-from quizes.models import Quiz
+from core.views import TeacherOnlyMixin
+from quizes.models import Quiz, Question
 from quizes.serializers import QuizFullSerializer, QuizLightSerializer
 from quizes.permissions import TeacherPermission
 from quizes.utils import parse_quiz
@@ -42,6 +43,11 @@ class QuizListAPIView(ModelViewSet):
         if self._is_teacher(self.request.user):
             return QuizFullSerializer
         return QuizLightSerializer
+
+
+class QuestionListAPIView(ModelViewSet, TeacherOnlyMixin):
+    model = Question
+    page_size = 100
 
 
 @api_view(['POST'])

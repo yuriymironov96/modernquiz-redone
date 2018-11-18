@@ -6,20 +6,10 @@ from organization.models import Teacher, Student
 
 
 class StudentResource(resources.ModelResource):
-
-    def before_import_row(self, row, **kwargs):
-        count = User.objects.filter(
-            models.Q(
-                username=row.get('username')
-            ) | models.Q(
-                email=row.get('email')
-            )
-        ).distinct().count()
-        if not row.get('id') and count:
-            raise Exception('User with such username or email already exists')
     
     class Meta:
         model = Student
+        import_id_fields = ('username', 'email')
         fields = (
-            'id', 'username', 'first_name', 'last_name', 'email', 'group_name'
+            'username', 'first_name', 'last_name', 'email', 'group_name'
         )
