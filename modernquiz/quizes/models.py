@@ -25,6 +25,9 @@ class Quiz(models.Model):
 
     class Meta:
         verbose_name_plural = 'Quizes'
+    
+    def __str__(self):
+        return 'Quiz {}'.format(self.title)
 
 
 class Question(models.Model):
@@ -48,6 +51,9 @@ class Question(models.Model):
         null=True,
         blank=True,
     )
+
+    def __str__(self):
+        return 'Question {}, quiz {}'.format(self.id, self.quiz_id)
     
 
 class Choice(models.Model):
@@ -65,3 +71,6 @@ class Choice(models.Model):
         null=True,
         blank=True,
     )
+
+    def __str__(self):
+        return 'Choice {}, question {}'.format(self.id, self.question_id)

@@ -125,11 +125,13 @@ def generate_quiz(request):
             'question_id': question.id,
             'question_type': question.question_type,
             'question_text': question.question_text,
-            'answers': question.choices.values(
-                'id',
-                'question_id',
-                'choice_text'
-            )
+            'question_image': question.image.name,
+            'answers': [{
+                'id': answer['id'],
+                'question_id': answer['question_id'],
+                'choice_text': answer['choice_text'],
+                'answer_image': answer['image'],
+            } for answer in question.choices.values('id', 'question_id', 'choice_text', 'image')]
         })
 
     return Response(response_body)

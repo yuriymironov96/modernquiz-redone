@@ -108,3 +108,4 @@ settings.py
 
 node_modules/
 static/
+media/
