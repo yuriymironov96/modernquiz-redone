@@ -34,7 +34,6 @@ export class LoginComponent {
       success => {
         this.authService.getCurrrentUser().subscribe(
           nameSuccess => {
-            console.log(nameSuccess);
             this.router.navigateByUrl('home');
           }
         );

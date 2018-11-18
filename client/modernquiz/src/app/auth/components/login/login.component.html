@@ -4,7 +4,7 @@
     <mat-card-subtitle>(your teacher should give them as soon as the quiz is published)</mat-card-subtitle>
   </mat-card-header>
   <div class="example-container">
-    <form *ngIf="!this.completed" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <mat-form-field class="form-group">
         <input matInput placeholder="Login" required class="spa-font" id="login" formControlName="login" #loginInput>
       </mat-form-field>
