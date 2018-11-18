@@ -43,6 +43,11 @@ class Question(models.Model):
         max_length=50
     )
     question_text = models.TextField()
+    image = models.ImageField(
+        upload_to='',
+        null=True,
+        blank=True,
+    )
     
 
 class Choice(models.Model):
@@ -55,3 +60,8 @@ class Choice(models.Model):
         default=False
     )
     choice_text = models.TextField()
+    image = models.ImageField(
+        upload_to='',
+        null=True,
+        blank=True,
+    )
