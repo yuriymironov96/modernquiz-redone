@@ -18,3 +18,13 @@
 .fill-remaining-space {
   left: 93%;
 }
+
+.img-parent {
+  width: 100px;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
