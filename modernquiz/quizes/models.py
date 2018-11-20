@@ -30,7 +30,8 @@ class Quiz(models.Model):
 class Question(models.Model):
     QUESTION_TYPES = (
         ('single_choice', 'Single choice'),
-        ('multiple_choice', 'Multiple choice')
+        ('multiple_choice', 'Multiple choice'),
+        ('freetext', 'Free text')
     )
     quiz = models.ForeignKey(
         'quizes.Quiz',
