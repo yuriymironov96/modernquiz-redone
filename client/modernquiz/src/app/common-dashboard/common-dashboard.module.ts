@@ -31,6 +31,7 @@ import { QuizCompleteConfirmComponent } from './components/quiz-complete-confirm
 import { QuizResultsModalComponent } from './components/quiz-results-modal/quiz-results-modal.component';
 import { RepassingNotificationModalComponent } from './components/repassing-notification-modal/repassing-notification-modal.component';
 import { ResultsModalComponent } from './components/results-modal/results-modal.component';
+import { ImageModalComponent } from './components/image-modal/image-modal.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ResultsModalComponent } from './components/results-modal/results-modal.
     QuizCompleteConfirmComponent,
     QuizResultsModalComponent,
     RepassingNotificationModalComponent,
-    ResultsModalComponent
+    ResultsModalComponent,
+    ImageModalComponent
   ],
   declarations: [
     HomePageComponent,
@@ -72,7 +74,8 @@ import { ResultsModalComponent } from './components/results-modal/results-modal.
     QuizCompleteConfirmComponent,
     QuizResultsModalComponent,
     RepassingNotificationModalComponent,
-    ResultsModalComponent
+    ResultsModalComponent,
+    ImageModalComponent
   ],
   providers: [QuizService, QuizResolverService]
 })

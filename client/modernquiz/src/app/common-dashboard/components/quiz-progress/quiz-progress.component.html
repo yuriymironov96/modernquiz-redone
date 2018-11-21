@@ -2,10 +2,21 @@
   <mat-step *ngFor="let question of quiz.questions">
     <ng-template matStepLabel></ng-template>
     <p class="spa-font">{{question['question_text']}}</p>
+    <div class="img-parent" *ngIf="question['question_image']">
+      <img (click)="openFullImage(question['question_image'])" src="/media/{{question['question_image']}}">
+    </div>
+    <br />
     <mat-radio-group *ngIf="question['question_type'] == 'single'" class="quiz-radio-group" [(ngModel)]="results[question['question_id']]">
-      <mat-radio-button *ngFor="let choice of question.answers" [value]="choice['id']" class="quiz-radio-button spa-font">
-        {{choice['choice_text']}}
-      </mat-radio-button>
+      <div *ngFor="let choice of question.answers">
+        <mat-radio-button [value]="choice['id']" class="quiz-radio-button spa-font">
+          {{choice['choice_text']}}
+        </mat-radio-button>
+        <br />
+        <div class="img-parent" *ngIf="choice['answer_image']">
+          <img (click)="openFullImage(choice['answer_image'])" src="/media/{{choice['answer_image']}}">
+        </div>
+        <br />
+      </div>
     </mat-radio-group>
     <div *ngIf="question['question_type'] == 'multiple_choice'" class="quiz-radio-group">
       <mat-checkbox *ngFor="let choice of question.answers" class="quiz-radio-button spa-font" (click)="toggleCheckbox(question, choice)">

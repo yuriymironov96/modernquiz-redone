@@ -25,6 +25,9 @@ class Quiz(models.Model):
 
     class Meta:
         verbose_name_plural = 'Quizes'
+    
+    def __str__(self):
+        return 'Quiz {}'.format(self.title)
 
 
 class Question(models.Model):
@@ -44,6 +47,14 @@ class Question(models.Model):
         max_length=50
     )
     question_text = models.TextField()
+    image = models.ImageField(
+        upload_to='',
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return 'Question {}, quiz {}'.format(self.id, self.quiz_id)
     
 
 class Choice(models.Model):
@@ -56,6 +67,15 @@ class Choice(models.Model):
         default=False
     )
     choice_text = models.TextField()
+    image = models.ImageField(
+        upload_to='',
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return 'Choice {}, question {}'.format(self.id, self.question_id)
+
 
 class Answer(models.Model):
     question = models.ForeignKey(
@@ -72,3 +92,4 @@ class Answer(models.Model):
         default=False
     )
     answer_text = models.TextField()
+

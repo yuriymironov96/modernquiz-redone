@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quizes', '0004_quiz_is_public'),
+        ('quizes', '0005_auto_20181118_1950'),
     ]
 
     operations = [

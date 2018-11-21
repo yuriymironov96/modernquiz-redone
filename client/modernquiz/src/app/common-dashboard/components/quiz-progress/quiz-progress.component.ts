@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { QuizCompleteConfirmComponent } from '../quiz-complete-confirm/quiz-complete-confirm.component';
 import { QuizService } from '../../services/quiz.service';
 import { QuizResultsModalComponent } from '../quiz-results-modal/quiz-results-modal.component';
+import { ImageModalComponent } from '../image-modal/image-modal.component';
 
 @Component({
   selector: 'app-quiz-progress',
@@ -30,6 +31,13 @@ export class QuizProgressComponent implements OnInit {
     } else {
       this.results[question['question_id']].push(answer['id']);
     }
+  }
+
+  openFullImage(imageUrl) {
+    this.dialog.open(ImageModalComponent, {
+      width: '80%',
+      data: { image: imageUrl }
+    });
   }
 
   submit() {
