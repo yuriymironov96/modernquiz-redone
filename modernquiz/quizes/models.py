@@ -56,3 +56,19 @@ class Choice(models.Model):
         default=False
     )
     choice_text = models.TextField()
+
+class Answer(models.Model):
+    question = models.ForeignKey(
+        'quizes.Question',
+        on_delete=models.CASCADE,
+        related_name='answers',
+    )
+    studentQuizResult = models.ForeignKey(
+        'organization.StudentQuizResult',
+        on_delete=models.CASCADE,
+        related_name='answers',
+    )
+    is_correct = models.BooleanField(
+        default=False
+    )
+    answer_text = models.TextField()
