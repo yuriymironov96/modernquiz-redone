@@ -24,8 +24,8 @@
       </mat-checkbox>
     </div>
     <div *ngIf="question['question_type'] == 'freetext'">
-        <mat-form-field class="form-group">
-            <input matInput class="spa-font" [(ngModel)]="choice['choice_text']">
+        <mat-form-field class="form-group" [(ngModel)]="results[question['question_id']]">
+            <textarea matInput class="spa-font" [(ngModel)]="question['answer_text']"></textarea>
           </mat-form-field>
     </div>
     <div>
