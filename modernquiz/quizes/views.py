@@ -168,7 +168,7 @@ def submit_results(request):
         if question.question_type == 'freetext':
             student_is_correct = False
             answer = Answer(studentQuizResult=quiz_result, question=question)
-            answer.answer_text
+            answer.answer_text = request.data['quiz'][str(question.id)]
             answer.save()
         else:
             student_is_correct = True
