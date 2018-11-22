@@ -22,6 +22,11 @@
       <mat-checkbox *ngFor="let choice of question.answers" class="quiz-radio-button spa-font" (click)="toggleCheckbox(question, choice)">
         {{choice['choice_text']}}
       </mat-checkbox>
+    <br />
+      <div class="img-parent" *ngIf="choice['answer_image']">
+        <img (click)="openFullImage(choice['answer_image'])" src="/media/{{choice['answer_image']}}">
+      </div>
+      <br />
     </div>
     <div *ngIf="question['question_type'] == 'freetext'">
         <mat-form-field class="form-group" [(ngModel)]="results[question['question_id']]">
