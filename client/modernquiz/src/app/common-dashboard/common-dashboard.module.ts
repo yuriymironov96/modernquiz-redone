@@ -14,6 +14,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material';
 
 
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -47,7 +48,8 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
     MatSliderModule,
     MatStepperModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatInputModule
   ],
   entryComponents: [
     StartQuizModalComponent,

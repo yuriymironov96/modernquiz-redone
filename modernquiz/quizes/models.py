@@ -33,7 +33,8 @@ class Quiz(models.Model):
 class Question(models.Model):
     QUESTION_TYPES = (
         ('single_choice', 'Single choice'),
-        ('multiple_choice', 'Multiple choice')
+        ('multiple_choice', 'Multiple choice'),
+        ('freetext', 'Free text')
     )
     quiz = models.ForeignKey(
         'quizes.Quiz',
@@ -74,3 +75,21 @@ class Choice(models.Model):
 
     def __str__(self):
         return 'Choice {}, question {}'.format(self.id, self.question_id)
+
+
+class Answer(models.Model):
+    question = models.ForeignKey(
+        'quizes.Question',
+        on_delete=models.CASCADE,
+        related_name='answers',
+    )
+    studentQuizResult = models.ForeignKey(
+        'organization.StudentQuizResult',
+        on_delete=models.CASCADE,
+        related_name='answers',
+    )
+    is_correct = models.BooleanField(
+        default=False
+    )
+    answer_text = models.TextField()
+    

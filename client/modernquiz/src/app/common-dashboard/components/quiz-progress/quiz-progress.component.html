@@ -18,17 +18,20 @@
         <br />
       </div>
     </mat-radio-group>
-    <div *ngIf="question['question_type'] != 'single'" class="quiz-radio-group">
-      <div *ngFor="let choice of question.answers">
-        <mat-checkbox class="quiz-radio-button spa-font" (click)="toggleCheckbox(question, choice)">
-          {{choice['choice_text']}}
-        </mat-checkbox>
-        <br />
-        <div class="img-parent" *ngIf="choice['answer_image']">
-          <img (click)="openFullImage(choice['answer_image'])" src="/media/{{choice['answer_image']}}">
-        </div>
-        <br />
+    <div *ngIf="question['question_type'] == 'multiple_choice'" class="quiz-radio-group">
+      <mat-checkbox *ngFor="let choice of question.answers" class="quiz-radio-button spa-font" (click)="toggleCheckbox(question, choice)">
+        {{choice['choice_text']}}
+      </mat-checkbox>
+    <br />
+      <div class="img-parent" *ngIf="choice['answer_image']">
+        <img (click)="openFullImage(choice['answer_image'])" src="/media/{{choice['answer_image']}}">
       </div>
+      <br />
+    </div>
+    <div *ngIf="question['question_type'] == 'freetext'">
+        <mat-form-field class="form-group">
+            <textarea matInput class="spa-font" [(ngModel)]="results[question['question_id']]"></textarea>
+          </mat-form-field>
     </div>
     <div>
       <button mat-raised-button matStepperNext class="spa-font fill-remaining-space" color="primary">

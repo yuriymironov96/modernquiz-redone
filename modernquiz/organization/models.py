@@ -85,3 +85,6 @@ class StudentQuizResult(models.Model):
         default=False
     )
     questions_amount = models.IntegerField()
+
+    def __str__(self):
+        return 'Quiz {}, student {} {}'.format(self.quiz.id, self.student.user.last_name, self.student.user.first_name)

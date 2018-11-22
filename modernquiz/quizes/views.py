@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from core.models import UserProfile
 from core.views import TeacherOnlyMixin
-from quizes.models import Quiz, Question
+from quizes.models import Quiz, Question, Answer
 from quizes.serializers import QuizFullSerializer, QuizLightSerializer
 from quizes.permissions import TeacherPermission
 from quizes.utils import parse_quiz
@@ -125,6 +125,7 @@ def generate_quiz(request):
             'question_id': question.id,
             'question_type': question.question_type,
             'question_text': question.question_text,
+            'answer_text': '',
             'question_image': question.image.name,
             'answers': [{
                 'id': answer['id'],
@@ -164,16 +165,22 @@ def submit_results(request):
     )
 
     for question in questions:
-        student_is_correct = True
-        for answer in question.choices.all():
-            if not _is_matching_answer(
-                    answer.id, request.data['quiz'][str(question.id)]) and \
-                    answer.is_correct:
-                student_is_correct = False
+        if question.question_type == 'freetext':
+            student_is_correct = False
+            answer = Answer(studentQuizResult=quiz_result, question=question)
+            answer.answer_text = request.data['quiz'][str(question.id)]
+            answer.save()
+        else:
+            student_is_correct = True
+            for answer in question.choices.all():
+                if not _is_matching_answer(
+                        answer.id, request.data['quiz'][str(question.id)]) and \
+                        answer.is_correct:
+                    student_is_correct = False
         if student_is_correct:
             quiz_result.total_points += 1
     quiz_result.save()
-                
+
     response_body = {
         'student_mark': quiz_result.total_points,
         'max_mark': quiz_result.questions_amount
