@@ -13,6 +13,7 @@ import { HomePageComponent } from './common-dashboard/components/home-page/home-
 
 import { TeacherDashboardModule } from './teacher-dashboard/teacher-dashboard.module';
 import { QuizUploadComponent } from './teacher-dashboard/components/quiz-upload/quiz-upload.component';
+import { QuizAddComponent } from './teacher-dashboard/components/quiz-add/quiz-add.component';
 
 import { AppComponent } from './app.component';
 import { IdentityService } from './identity.service';
@@ -43,6 +44,12 @@ export const ROUTES: Routes = [
   {
     path: 'import',
     component: QuizUploadComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add',
+    component: QuizAddComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },

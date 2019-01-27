@@ -2,6 +2,10 @@
   Import
   <mat-icon matSuffix>backup</mat-icon>
 </a>
+<a mat-raised-button color="primary" class="import-quiz-button nav-element" *ngIf="isTeacher" mat-button routerLink="/add" routerLinkActive="mat-elevation-z6">
+  Add
+  <mat-icon matSuffix>add</mat-icon>
+</a>
 <mat-card class="quiz-card" *ngFor="let quiz of QUIZES">
   <mat-card-header>
     <mat-card-title>{{quiz['title']}}</mat-card-title>

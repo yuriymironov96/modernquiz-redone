@@ -6,21 +6,32 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class QuizUploadService {
-
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   upload(files, parameters) {
     const headers = new Headers({
-      'Authorization': 'Token ' + localStorage.getItem('currentUserToken')
+      Authorization: 'Token ' + localStorage.getItem('currentUserToken')
     });
     const options = new RequestOptions({
       headers: headers,
       params: parameters
     });
-    return this.http.post('/api/quizes/quizes/create_from_xml/', files, options)
+    return this.http
+      .post('/api/quizes/quizes/create_from_xml/', files, options)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
-
   }
 
+  add(quiz) {
+    const headers = new Headers({
+      Authorization: 'Token ' + localStorage.getItem('currentUserToken')
+    });
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http
+      .post('/api/quizes/quizes/add/', quiz, options)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error));
+  }
 }
