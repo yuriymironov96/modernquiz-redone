@@ -1,6 +1,7 @@
 from django.db import models
 
 from quizes.managers import QuizManager
+from quizes import validators
 
 
 class Quiz(models.Model):
@@ -75,6 +76,9 @@ class Choice(models.Model):
 
     def __str__(self):
         return 'Choice {}, question {}'.format(self.id, self.question_id)
+    
+    def clean(self):
+        validators.single_correct_choice(self)
 
 
 class Answer(models.Model):

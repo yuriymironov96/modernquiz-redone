@@ -30,7 +30,7 @@ export class QuizUploadService {
       headers: headers
     });
     return this.http
-      .post('/api/quizes/quizes/add/', quiz, options)
+      .post('/api/quizes/quizes/create_quiz_from_json/', quiz, options)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
   }

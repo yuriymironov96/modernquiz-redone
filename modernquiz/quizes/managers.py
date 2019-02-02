@@ -27,6 +27,29 @@ class QuizManager(models.Manager):
                 )
         
         return new_quiz
+    
+    def create_from_json(self, json_quiz):
+        Question = apps.get_model('quizes', 'Question')
+        Choice = apps.get_model('quizes', 'Choice')
+
+        new_quiz = self.create(
+            title=json_quiz.get('title'),
+            description=json_quiz.get('description')
+        )
+        for raw_question in json_quiz.get('questions', []):
+            new_question = Question.objects.create(
+                question_type=raw_question.get('question_type'),
+                question_text=raw_question.get('question'),
+                quiz=new_quiz
+            )
+            for raw_answer in raw_question.get('answers', []):
+                answer = Choice.objects.create(
+                    is_correct=raw_answer.get('correct', False),
+                    choice_text=raw_answer.get('text'),
+                    question=new_question
+                )
+        
+        return new_quiz
 
     
 

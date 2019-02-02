@@ -7,6 +7,14 @@
       <input matInput placeholder="Quiz title" [(ngModel)]="this.form.title" />
     </mat-form-field>
     <br />
+    <mat-form-field>
+      <textarea
+        matInput
+        placeholder="Description"
+        [(ngModel)]="this.form.description"
+      ></textarea>
+    </mat-form-field>
+    <br />
     <button
       mat-raised-button
       color="accent"
@@ -26,22 +34,24 @@
           [(ngModel)]="question.question"
         />
       </mat-form-field>
-      <!-- <mat-form-field>
-        <select matNativeControl [(ngModel)]="question.question_type">
-          <option value="single_choice">Single select</option>
-          <option value="multiple_choice">Multi select</option>
-          <option value="freetext">Free text</option>
-        </select>
-      </mat-form-field> -->
       <mat-form-field>
-          <mat-select [(value)]="question.question_type">
-            <mat-option value="single_choice">Single select</mat-option>
-            <mat-option value="multiple_choice">Multi select</mat-option>
-            <mat-option value="freetext">Free text</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <mat-select [(value)]="question.question_type">
+          <mat-option value="single_choice">Single select</mat-option>
+          <mat-option value="multiple_choice">Multi select</mat-option>
+          <mat-option value="freetext">Free text</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        md-button
+        (click)="this.deleteQuestion(question)"
+      >
+        <mat-icon matSuffix>delete</mat-icon>
+      </button>
       <br />
-      <div >
+      <div *ngIf="question.question_type != 'freetext'">
         <button
           mat-raised-button
           color="accent"
@@ -54,7 +64,7 @@
         </button>
       </div>
       <div *ngFor="let answer of question.answers">
-        <div >
+        <div *ngIf="question.question_type != 'freetext'">
           <mat-form-field>
             <input
               matInput
@@ -62,6 +72,16 @@
               [(ngModel)]="answer.text"
             />
           </mat-form-field>
+          <mat-checkbox [(ngModel)]="answer.correct"></mat-checkbox>
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            md-button
+            (click)="this.deleteAnswer(answer, question)"
+          >
+            <mat-icon matSuffix>delete</mat-icon>
+          </button>
         </div>
       </div>
     </div>
@@ -71,19 +91,19 @@
       color="primary"
       type="button"
       md-button
-      (click)="fileInput.click()"
+      (click)="this.onSubmit()"
     >
       Upload quiz
     </button>
-    <button
+    <!-- <button
       mat-raised-button
       color="primary"
       type="button"
       md-button
-      (click)="fileInput.click()"
+      (click)="this.onSubmit(true)"
     >
       Save and continue
-    </button>
+    </button> -->
     <!-- <input hidden type="file" id="quiz-file" (change)="onFileChange($event)" /> -->
   </div>
   <br />

@@ -65,6 +65,13 @@ def create_quiz_from_xml(request):
 
 @api_view(['POST'])
 @permission_classes([TeacherPermission,])
+def create_quiz_from_json(request):
+    Quiz.objects.create_from_json(request.data)
+    return Response({'status': 'OK'})
+
+
+@api_view(['POST'])
+@permission_classes([TeacherPermission,])
 def generate_creds(request):
 
     response_body = {
