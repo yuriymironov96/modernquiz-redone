@@ -39,13 +39,13 @@ class QuizManager(models.Manager):
         for raw_question in json_quiz.get('questions', []):
             new_question = Question.objects.create(
                 question_type=raw_question.get('question_type'),
-                question_text=raw_question.get('question'),
+                question_text=raw_question.get('question_text'),
                 quiz=new_quiz
             )
             for raw_answer in raw_question.get('answers', []):
                 answer = Choice.objects.create(
-                    is_correct=raw_answer.get('correct', False),
-                    choice_text=raw_answer.get('text'),
+                    is_correct=raw_answer.get('is_correct', False),
+                    choice_text=raw_answer.get('choice_text'),
                     question=new_question
                 )
         

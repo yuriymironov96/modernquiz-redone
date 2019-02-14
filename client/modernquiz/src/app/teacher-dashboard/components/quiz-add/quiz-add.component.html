@@ -31,7 +31,7 @@
         <input
           matInput
           placeholder="Question text"
-          [(ngModel)]="question.question"
+          [(ngModel)]="question.question_text"
         />
       </mat-form-field>
       <mat-form-field>
@@ -69,7 +69,7 @@
             <input
               matInput
               placeholder="Answer text"
-              [(ngModel)]="answer.text"
+              [(ngModel)]="answer.choice_text"
             />
           </mat-form-field>
           <mat-checkbox [(ngModel)]="answer.correct"></mat-checkbox>
@@ -91,6 +91,7 @@
       color="primary"
       type="button"
       md-button
+      [disabled]="this.isDisabled()"
       (click)="this.onSubmit()"
     >
       Upload quiz

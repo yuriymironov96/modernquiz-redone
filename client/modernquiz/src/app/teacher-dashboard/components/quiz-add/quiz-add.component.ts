@@ -27,6 +27,19 @@ export class QuizAddComponent {
     this.quizUploadService = quizUploadService;
   }
 
+  isDisabled() {
+    return (
+      !this.form['title'] ||
+      this.form.questions.some(question => !question.question_text) ||
+      this.form.questions.some(
+        question =>
+          question.question_type !== 'freetext' &&
+          (question.answers.some(answer => !answer.choice_text) ||
+            !question.answers.length)
+      )
+    );
+  }
+
   onSubmit(saveAndContinue) {
     this.loading = true;
 
